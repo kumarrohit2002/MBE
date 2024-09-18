@@ -198,6 +198,8 @@ exports.searchMentor = async (req, res) => {
         const filter = {
             $or: [
                 { name: { $regex: searchValue, $options: 'i' } },     
+                { title: { $regex: searchValue, $options: 'i' } },     
+                { category: { $regex: searchValue, $options: 'i' } },     
                 { address: { $regex: searchValue, $options: 'i' } }, 
                 { skills: { $elemMatch: { $regex: searchValue, $options: 'i' } } }  // Search within skills array
             ]

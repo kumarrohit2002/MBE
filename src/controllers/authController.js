@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const TempUser = require('../models/TempUser.model'); // Temporary user model
 const User = require('../models/User.model'); // Main user model
@@ -28,8 +28,9 @@ exports.signup = async (req, res) => {
                 message: 'You have already registered. Please log in.',
             });
         }
-
         const hashPassword = await bcrypt.hash(password, 10);
+
+        // const hashPassword = await bcrypt.hash(password, 10);
         const otp = crypto.randomInt(1000, 9999).toString();
         const otpExpires = Date.now() + 10 * 60 * 1000; // OTP expires in 10 minutes
 
@@ -200,8 +201,8 @@ exports.login = async (req, res) => {
                 message: 'User not found',
             });
         }
-
         const isMatch = await bcrypt.compare(password, user.password);
+        // const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).json({
                 success: false,

@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const TempUser = require('../models/TempUser.model'); // Temporary user model
 const User = require('../models/User.model'); // Main user model

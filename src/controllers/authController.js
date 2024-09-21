@@ -29,7 +29,7 @@ exports.signup = async (req, res) => {
             });
         }
 
-        const hashPassword = await bcrypt.hash(password, 10);
+        const hashPassword = bcrypt.hash(password, 10);
         const otp = crypto.randomInt(1000, 9999).toString();
         const otpExpires = Date.now() + 10 * 60 * 1000; // OTP expires in 10 minutes
 
@@ -201,7 +201,7 @@ exports.login = async (req, res) => {
             });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).json({
                 success: false,
